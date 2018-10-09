@@ -19,16 +19,28 @@
 
 \editor{Associate Editor: XXXXXXX}
 
-\abstract{\textbf{Motivation:}\\
-  \textbf{Results:} Text Text Text Text
-  Text Text Text Text Text Text Text Text Text Text Text Text Text
-  Text Text Text Text Text Text Text Text Text Text Text Text Text
-  Text Text Text Text\\
-  \textbf{Availability:} The BiocPkgTools
-  package is available from Bioconductor
-  (https://Bioconductor.org/packages/BiocPkgToolg) or from Github
-  (https://github.com/seandavi/BiocPkgTools).\\
-  \textbf{Contact:} \href{name@bio.com}{name@bio.com}}
+\abstract{\textbf{Motivation:} The Bioconductor project, a large
+  collection of open source software for the comprehension of
+  large-scale biologic data, continues to grow with the contribution
+  of new packages added each week.  The motivation for the
+  BiocPkgTools software is to allow developers and the Bioconductor
+  community to easily access the Bioconductor package ecosystem and
+  associated metadata, leading to applications such as custom
+  reporting, data and text mining of Bioconductor packages, graph
+  analytics over package dependencies, and advanced, custom search
+  approaches. \\ \textbf{Results:} The BiocPkgTools package has been
+  incorporated into the Bioconductor project. It provides easy access
+  to tidy data structures of detailed package metadata, longitudinal
+  package download statistics, package dependencies, and build
+  reports. Conversion of package dependencies from tidy data
+  structures to graph data structures is also possible, enabling
+  graph-based analytics and visualization. \\ \textbf{Availability:}
+  The BiocPkgTools software and complete documentation are available
+  from Bioconductor
+  (\href{https://Bioconductor.org/packages/BiocPkgTools}{https://Bioconductor.org/packages/BiocPkgTools})
+  and from Github
+  (\href{https://github.com/seandavi/BiocPkgTools}{https://github.com/seandavi/BiocPkgTools}).\\ \textbf{Contact:}
+  \href{seandavi@gmail.com}{seandavi@gmail.com}}
 
 \maketitle
 
