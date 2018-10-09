@@ -4,11 +4,13 @@
 \access{Advance Access Publication Date: Day Month Year}
 \appnotes{Manuscript Category}
 
+\bibliography{document.bib}
+
 \begin{document}
 \firstpage{1}
 
 \title[BiocPkgTools: Inspecting the Bioconductor ecosystem]{BiocPkgTools: Utilities for inspecting the Bioconductor package ecosystem}
-\author[Davis \textit{et~al}.]{Sean Davis\,$^{\text{\sfb 1,}*}$, Lori Shepherd\,$^{\text{\sfb 2}}$, Martin T. Morgan\,$^{\text{\sfb 2}}$, and Vincent J. Carey\,$^{\text{\sfb 3,}}$}
+\author[Davis \textit{et~al}.]{Martin T. Morgan\,$^{\text{\sfb 2}}$, Lori Shepherd\,$^{\text{\sfb 2}}$, Vincent J. Carey\,$^{\text{\sfb 3}}$, and Sean Davis\,$^{\text{\sfb 1,}*}$}
 \address{$^{\text{\sf 1}}$Center for Cancer Research, National Cancer Institute, National Institutes of Health, Bethesda, MD 20892, USA\\
   $^{\text{\sf 2}}$Roswell Park Comprehensive Cancer Center, Buffalo, NY 14203, USA\\
   $^{\text{\sf 3}}$Channing Division of Network Medicine, Brigham and Women's Hospital, Boston, MA 02115, USA}
@@ -29,14 +31,15 @@
   reporting, data and text mining of Bioconductor packages, graph
   analytics over package dependencies, and advanced, custom search
   approaches. \\ \textbf{Results:} The BiocPkgTools package has been
-  incorporated into the Bioconductor project. It provides easy access
-  to tidy data structures of detailed package metadata, longitudinal
-  package download statistics, package dependencies, and build
-  reports. Conversion of package dependencies from tidy data
-  structures to graph data structures is also possible, enabling
-  graph-based analytics and visualization. \\ \textbf{Availability:}
-  The BiocPkgTools software and complete documentation are available
-  from Bioconductor
+  incorporated into the Bioconductor project, installs using standard
+  procedures, and runs on any system supporting R. It provides easy
+  access to detailed package metadata, longitudinal package download
+  statistics, package dependencies, and build reports, all as tidy
+  data. BiocPkgTools can convert from tidy data structures to graph
+  structures, enabling graph-based analytics and visualization. Full
+  documentation and example use cases are
+  included. \\ \textbf{Availability:} The BiocPkgTools software and
+  complete documentation are available from Bioconductor
   (\href{https://Bioconductor.org/packages/BiocPkgTools}{https://Bioconductor.org/packages/BiocPkgTools})
   and from Github
   (\href{https://github.com/seandavi/BiocPkgTools}{https://github.com/seandavi/BiocPkgTools}).\\ \textbf{Contact:}
@@ -44,18 +47,21 @@
 
 \maketitle
 
+<<init, include=FALSE>>=
+library(knitr)
+opts_chunk$set(include = FALSE, cache=as.logical(Sys.getenv('NOCACHE', TRUE)))
+@ 
+
+<<loadData>>=
+library(BiocPkgTools)
+pkgdata = biocPkgList()
+dldata = biocDownloadStats() 
+@ 
+
 \section{Introduction}
 
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text. Figure~\ref{fig:01}
-shows that the above method  Text Text Text Text  Text Text Text
-Text Text Text  Text Text.  \citep{Bag01} wants to know about
-{\ldots}{\ldots} text follows.
-\begin{equation}
-\sum \text{\it x}+ \text{\it y} =\text{\it Z}\label{eq:01}\vspace*{-10pt}
-\end{equation}
+The Bioconductor project \Sexpr{nrow(pkgdata)} packages.
 
-%\enlargethispage{12pt}
 
 \section{Approach}
 
