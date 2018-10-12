@@ -86,8 +86,8 @@ dependency graph analytics, package filtering, and text mining.
 
 BiocPkgTools is implemented as a standard R package and hosted in the
 Bioconductor repository. All functions are documented and include
-examples. An included vignette or tutorial, written in a R markdown,
-demonstrates features and capabilities. 
+examples. An included vignette (tutorial) demonstrates features and
+capabilities.
 
 \section{Features and usage}
 
