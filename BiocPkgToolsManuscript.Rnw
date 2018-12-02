@@ -1,51 +1,80 @@
-\documentclass{bioinfo}
-\copyrightyear{2018} \pubyear{2018}
+\documentclass[9pt,a4paper]{extarticle}
+\usepackage{f1000_styles}
+\usepackage{hyperref}
+\usepackage{todonotes}
 
-\access{Advance Access Publication Date: Day Month Year}
-\appnotes{Manuscript Category}
+\usepackage{tabularx}
 
-\usepackage{natbib}
+%% Default: numerical citations
+\usepackage[numbers]{natbib}
+
+%% Uncomment this lines for superscript citations instead
+% \usepackage[super]{natbib}
+
+%% Uncomment these lines for author-year citations instead
+% \usepackage[round]{natbib}
+% \let\cite\citep
+
+
+
+%% \title[BiocPkgTools: Inspecting the Bioconductor ecosystem]{BiocPkgTools: Utilities for inspecting the Bioconductor package ecosystem}
+%% \author[Davis \textit{et~al}.]{Martin T. Morgan\,$^{\text{\sfb 2}}$, Lori Shepherd\,$^{\text{\sfb 2}}$, Vincent J. Carey\,$^{\text{\sfb 3}}$, and Sean Davis\,$^{\text{\sfb 1,}*}$}
+%% \address{$^{\text{\sf 1}}$Center for Cancer Research, National Cancer Institute, National Institutes of Health, Bethesda, MD 20892, USA\\
+%%   $^{\text{\sf 2}}$Roswell Park Comprehensive Cancer Center, Buffalo, NY 14203, USA\\
+%%   $^{\text{\sf 3}}$Channing Division of Network Medicine, Brigham and Women's Hospital, Boston, MA 02115, USA}
+
+%% \corresp{$^\ast$To whom correspondence should be addressed.}
+
 
 \begin{document}
-\firstpage{1}
 
-\title[BiocPkgTools: Inspecting the Bioconductor ecosystem]{BiocPkgTools: Utilities for inspecting the Bioconductor package ecosystem}
-\author[Davis \textit{et~al}.]{Martin T. Morgan\,$^{\text{\sfb 2}}$, Lori Shepherd\,$^{\text{\sfb 2}}$, Vincent J. Carey\,$^{\text{\sfb 3}}$, and Sean Davis\,$^{\text{\sfb 1,}*}$}
-\address{$^{\text{\sf 1}}$Center for Cancer Research, National Cancer Institute, National Institutes of Health, Bethesda, MD 20892, USA\\
-  $^{\text{\sf 2}}$Roswell Park Comprehensive Cancer Center, Buffalo, NY 14203, USA\\
-  $^{\text{\sf 3}}$Channing Division of Network Medicine, Brigham and Women's Hospital, Boston, MA 02115, USA}
+\pagestyle{front}
 
-\corresp{$^\ast$To whom correspondence should be addressed.}
+\title{\textit{BiocPkgTools}: Toolkit for Mining the Bioconductor Package Ecosystem}
 
-\history{Received on XXXXX; revised on XXXXX; accepted on XXXXX}
-
-\editor{Associate Editor: XXXXXXX}
-
-\abstract{\textbf{Motivation:} The Bioconductor project, a large
-  collection of open source software for the comprehension of
-  large-scale biologic data, continues to grow with the contribution
-  of new packages added each week.  The motivation for the
-  BiocPkgTools software is to allow developers and the Bioconductor
-  community to easily access the Bioconductor package ecosystem and
-  associated metadata, leading to applications such as custom
-  reporting, data and text mining of Bioconductor packages, graph
-  analytics over package dependencies, and advanced, custom search
-  approaches. \\ \textbf{Results:} The BiocPkgTools package has been
-  incorporated into the Bioconductor project, installs using standard
-  procedures, and runs on any system supporting R. It provides easy
-  access to detailed package metadata, longitudinal package download
-  statistics, package dependencies, and build reports, all as tidy
-  data. BiocPkgTools can convert from tidy data structures to graph
-  structures, enabling graph-based analytics and visualization. Full
-  documentation and example use cases are
-  included. \\ \textbf{Availability:} The BiocPkgTools software and
-  complete documentation are available from Bioconductor
-  (\href{https://Bioconductor.org/packages/BiocPkgTools}{https://Bioconductor.org/packages/BiocPkgTools})
-  and from Github
-  (\href{https://github.com/seandavi/BiocPkgTools}{https://github.com/seandavi/BiocPkgTools}).\\ \textbf{Contact:}
-  \href{seandavi@gmail.com}{seandavi@gmail.com}}
+\author[1]{Shian Su}
+\author[2]{Vincent J. Carey}
+\author[3]{Lori Shepherd}
+\author[3]{Martin T. Morgan}
+\author[4]{Sean Davis}
+\affil[1]{Molecular Medicine Division, The Walter and Eliza Hall Institute of Medical Research, Parkville, Australia}
+\affil[2]{Channing Division of Network Medicine, Brigham and Women's Hospital, Boston, MA, USA}
+\affil[3]{Roswell Park Comprehensive Cancer Center, Buffalo, NY, USA}
+\affil[4]{Center for Cancer Research, National Cancer Institute, National Institutes of Health, Bethesda, MD, USA}
 
 \maketitle
+\thispagestyle{front}
+
+
+\begin{abstract}
+\textbf{Motivation:} The Bioconductor project, a large
+  collection of open source software for the comprehension of
+  large-scale biologic data, continues to grow with new packages added
+  each week, motivating the development of a package focused on
+  exposing package metadata to developers and users. The resulting
+  BiocPkgTools facilitates access to the Bioconductor package
+  ecosystem and associated metadata in computable form, leading to
+  applications such as custom reporting, data and text mining of
+  Bioconductor packages, graph analytics over package dependencies,
+  and advanced, custom search approaches. \\ \textbf{Results:} The
+  BiocPkgTools package has been incorporated into the Bioconductor
+  project, installs using standard procedures, and runs on any system
+  supporting R. It provides functions to load detailed package
+  metadata, longitudinal package download statistics, package
+  dependencies, and Bioconductor build reports, all as tidy
+  data. BiocPkgTools can convert from tidy data structures to graph
+  structures, enabling graph-based analytics and visualization. An
+  end-user-friendly graphical package explorer aids in task-centric
+  package discovery. Full documentation and example use cases are
+  included. \\ \textbf{Availability:} The BiocPkgTools software and
+  complete documentation are available from Bioconductor
+  (\href{https://Bioconductor.org/packages/BiocPkgTools}{https://Bioconductor.org/packages/BiocPkgTools}).
+\end{abstract}
+
+\section*{Keywords}
+
+Bioconductor, data mining, R, open data, software, data science, software development, bioinformatics
+
 
 <<init, include=FALSE>>=
 library(knitr)
@@ -62,7 +91,10 @@ pkgdata = biocPkgList()
 dldata = biocDownloadStats() 
 @ 
 
-\section{Introduction}
+\clearpage
+\pagestyle{main}
+
+\section*{Introduction}
 
 Bioconductor is a open source software project (comprising
 \Sexpr{nrow(pkgdata)} individual packages) and community devoted to
@@ -72,39 +104,75 @@ the Bioconductor project build successfully and pass basic
 checks. Package downloads are tracked and aggregated by package and
 month, longitudinally. Finally, package details such as title,
 description, version, author, and dependencies on other R packages are
-compiled based on package metadata. The current size and growth of the
-project suggests that there may be merit in facilitating data science
-approaches to the contents of the Bioconductor ecosystem. Therefore,
-we have developed a small suite of tools to provide easy access to
-project data such download statistics, bulk package metadata, and
-package build status. Developers, project leaders, open source
-software researchers, and Bioconductor end users can build on the
-availability of these data for applications such as custom reporting,
-dependency graph analytics, package filtering, and text mining.
+compiled based on package metadata.
 
-\section{Implementation}
+The current size and growth of the Bioconductor project suggests that
+there is merit in exposing computable forms of the metadata describing
+the Bioconductor package ecosystem. To that end, we developed a small
+suite of tools to provide easy access to project details such download
+statistics, bulk package metadata, and package build
+status. Developers, project leaders, open source software researchers,
+and Bioconductor end users can build on the availability of these data
+for applications such as custom reporting, dependency graph analytics,
+package filtering, and text mining.
 
+\section*{Implementation}
+
+\todo{move this section down?}
 BiocPkgTools is implemented as a standard R package and hosted in the
 Bioconductor repository. All functions are documented and include
-examples. An included vignette (tutorial) demonstrates features and
+examples. An included tutorial (vignette) demonstrates features and
 capabilities.
 
-\section{Features and usage}
+
+
+\section*{Features and usage}
+
+
+
 
 BiocPkgTools core functionality is to expose Bioconductor project and
-package metadata as tidy \citep{Wickham2014-ye} objects. Package
-metadata, monthly summaries of download statistics, and build reports
-from the Bioconductor automated build process. 
+package metadata as tidy \citep{Wickham2014-ye} objects.
+
+
+
+\begin{table}[h]
+  \caption{Overview of package functionality.}
+  \label{tab:functions}
+  \begin{tabularx}{\linewidth}{ l X }
+    \hline 
+    Name & Functionality \\
+    \hline 
+    biocPkgList & Package details including description, author and maintainer, dependencies, URLs, bug report mechanism, \\
+    biocDownloadStats & Monthly download statistics for all packages \\
+    biocbuildReport & Bioconductor build report for all packages and systems \\
+    problemPage & Produce interactive, customized build report for an individual package author \\
+    buildPkgDependencyDataFrame & Convenience function to create tabular package dependency data set \\
+    buildPkgDependencyIgraph & Treat package dependencies as a graph \\
+    inducedSubgraphByPkgs & Create a minimal subgraph of Bioconductor dependencies bases on specific packages \\
+    subgraphByDegree & Return a subgraph of all packages within a given degree of a single package \\
+    biocExplore & Interactively browsable ``bubble plot'' of Bioconductor packages and details \\
+    \hline
+  \end{tabularx} 
+\end{table}
+
+The
+\texttt{biocPkgList}, \texttt{biocDownloadStats}, and
+\texttt{biocBuildReport} functions access detailed package metadata,
+longitudinal download statistics, and build reports from the
+Bioconductor automated build process, respectively.
+
 
 <<downloads>>=
 library(BiocPkgTools)
 dlstats = biocDownloadStats()
+
 head(dlstats, 3)
 @ 
 
 <<buildreport>>=
 buildrep = biocBuildReport()
-tail(buildrep,3)
+
 @ 
 
 Take a look at Figure \ref{fig:dependencygraph}.
@@ -120,15 +188,59 @@ Take a look at Figure \ref{fig:dependencygraph}.
   \label{fig:dependencygraph}
 \end{figure}
 
-\section{Conclusion}
+\section*{Summary} % Optional - only if NO new datasets are included
 
-\section*{Acknowledgements}
+- FAIR data
+- For developers
+- For users
+
+This section is required if the paper does not include novel data or analyses.  It allows authors to briefly summarize the key points from the article.
+
+\section*{Data availability} % Optional - only if novel data or analyses are included
+Please add details of where any datasets that are mentioned in the paper, and that have not have not previously been formally published, can be found.  If previously published datasets are mentioned, these should be cited in the references, as per usual scholarly conventions.
+
+\section*{Software availability}
+This section will be generated by the Editorial Office before publication. Authors are asked to provide some initial information to assist the Editorial Office, as detailed below.
+\begin{enumerate}
+\item URL link to where the software can be downloaded from or used by a non-coder (AUTHOR TO PROVIDE; optional)
+\item URL link to the author's version control system repository containing the source code (AUTHOR TO PROVIDE; required)
+\item Link to source code as at time of publication ({\textit{F1000Research}} TO GENERATE)
+\item Link to archived source code as at time of publication ({\textit{F1000Research}} TO GENERATE)
+\item Software license (AUTHOR TO PROVIDE; required)
+\end{enumerate}
 
 
 
-\section*{Funding}
+\section*{Author contributions}
+In order to give appropriate credit to each author of an article, the individual
+contributions of each author to the manuscript should be detailed in this section. We
+recommend using author initials and then stating briefly how they contributed.
 
-Research reported in this publication was supported by the National Human Genome Research Institute of the National Institutes of Health under award number U41HG004059, the National Cancer Institute of the National Institutes of Health under award number U24CA180996, and the Center for Cancer Research, part of the Intramural Research Program at the National Cancer Institute at the National Institutes of Health. Part of this work was performed on behalf of the SOUND Consortium and funded under the EU H2020 Personalizing Health and Care Program, Action contract number 633974.
+\section*{Competing interests}
+All financial, personal, or professional competing interests for any of the authors that
+could be construed to unduly influence the content of the article must be disclosed and will be displayed alongside the article. If there are no relevant competing interests to declare, please add the following: 'No competing interests were disclosed'.
+
+\section*{Grant information}
+
+Research reported in this publication was supported by the National
+Human Genome Research Institute of the National Institutes of Health
+under award number U41HG004059, the National Cancer Institute of the
+National Institutes of Health under award number U24CA180996, and the
+Center for Cancer Research, part of the Intramural Research Program at
+the National Cancer Institute at the National Institutes of
+Health. Part of this work was performed on behalf of the SOUND
+Consortium and funded under the EU H2020 Personalizing Health and Care
+Program, Action contract number 633974.
+
+\section*{Acknowledgments}
+This section should acknowledge anyone who contributed to the research or the
+article but who does not qualify as an author based on the criteria provided earlier
+(e.g. someone or an organization that provided writing assistance). Please state how
+they contributed; authors should obtain permission to acknowledge from all those
+mentioned in the Acknowledgments section.
+
+Please do not list grant funding in this section.
+
 
 \bibliographystyle{natbib}
 %\bibliographystyle{achemnat}
