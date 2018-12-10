@@ -35,6 +35,7 @@
 \author[1]{Shian Su}
 \author[2]{Vincent J. Carey}
 \author[3]{Lori Shepherd}
+\author[1]{Matthew Ritchie}
 \author[3]{Martin T. Morgan}
 \author[4]{Sean Davis}
 \affil[1]{Molecular Medicine Division, The Walter and Eliza Hall Institute of Medical Research, Parkville, Australia}
@@ -47,27 +48,27 @@
 
 
 \begin{abstract}
-\textbf{Motivation:} The Bioconductor project, a large
-  collection of open source software for the comprehension of
-  large-scale biologic data, continues to grow with new packages added
-  each week, motivating the development of a package focused on
-  exposing package metadata to developers and users. The resulting
-  BiocPkgTools facilitates access to the Bioconductor package
-  ecosystem and associated metadata in computable form, leading to
-  applications such as custom reporting, data and text mining of
-  Bioconductor packages, graph analytics over package dependencies,
-  and advanced, custom search approaches. \\ \textbf{Results:} The
-  BiocPkgTools package has been incorporated into the Bioconductor
-  project, installs using standard procedures, and runs on any system
-  supporting R. It provides functions to load detailed package
-  metadata, longitudinal package download statistics, package
-  dependencies, and Bioconductor build reports, all as tidy
-  data. BiocPkgTools can convert from tidy data structures to graph
-  structures, enabling graph-based analytics and visualization. An
-  end-user-friendly graphical package explorer aids in task-centric
-  package discovery. Full documentation and example use cases are
-  included. \\ \textbf{Availability:} The BiocPkgTools software and
-  complete documentation are available from Bioconductor
+  \\ \textbf{Motivation:} The Bioconductor project, a large collection of
+  open source software for the comprehension of large-scale biologic
+  data, continues to grow with new packages added each week,
+  motivating the development of software tools focused on exposing
+  package metadata to developers and users. The resulting BiocPkgTools
+  package facilitates access to the Bioconductor package ecosystem and
+  associated metadata in computable form, enabling potential
+  downstream applicaitons such as custom reporting, data and text
+  mining of Bioconductor packages, graph analytics over package
+  dependencies, and advanced, custom search approaches. \\
+  \textbf{Results:} The BiocPkgTools package has been incorporated
+  into the Bioconductor project, installs using standard procedures,
+  and runs on any system supporting R. It provides functions to load
+  detailed package metadata, longitudinal package download statistics,
+  package dependencies, and Bioconductor build reports, all in ``tidy
+  data'' form. BiocPkgTools can convert from tidy data structures to
+  graph structures, enabling graph-based analytics and
+  visualization. An end-user-friendly graphical package explorer aids
+  in task-centric package discovery. Full documentation and example
+  use cases are included. \\ \textbf{Availability:} The BiocPkgTools
+  software and complete documentation are available from Bioconductor
   (\href{https://Bioconductor.org/packages/BiocPkgTools}{https://Bioconductor.org/packages/BiocPkgTools}).
 \end{abstract}
 
@@ -80,7 +81,7 @@ Bioconductor, data mining, R, open data, software, data science, software develo
 library(knitr)
 opts_chunk$set(cache=as.logical(Sys.getenv('NOCACHE', TRUE)),
                size="small")
-options(width=40)
+options(width=70)
 @ 
 
 <<loadData, include=FALSE>>=
@@ -116,28 +117,21 @@ and Bioconductor end users can build on the availability of these data
 for applications such as custom reporting, dependency graph analytics,
 package filtering, and text mining.
 
-\section*{Implementation}
-
-\todo{move this section down?}
-BiocPkgTools is implemented as a standard R package and hosted in the
-Bioconductor repository. All functions are documented and include
-examples. An included tutorial (vignette) demonstrates features and
-capabilities.
-
-
 
 \section*{Features and usage}
 
+The core functionality of the BiocPkgTools package is to expose
+Bioconductor project and package metadata as tidy
+\citep{Wickham2014-ye} objects. The data presented by the package are
+accessed directly from online resources available from
+Bioconductor. As such, the package relies on web connectivity and
+utilizes the most recent data. Installation instructions are detailed
+on the package website.
 
-
-
-BiocPkgTools core functionality is to expose Bioconductor project and
-package metadata as tidy \citep{Wickham2014-ye} objects.
-
-
+Package functionality can be roughly divided into data access, data presentation, and graph/network functionality. See Table \ref{tab:functions} for an overview.
 
 \begin{table}[h]
-  \caption{Overview of package functionality.}
+  \caption{Main package functions and descriptions.}
   \label{tab:functions}
   \begin{tabularx}{\linewidth}{ l X }
     \hline 
@@ -146,41 +140,61 @@ package metadata as tidy \citep{Wickham2014-ye} objects.
     biocPkgList & Package details including description, author and maintainer, dependencies, URLs, bug report mechanism, \\
     biocDownloadStats & Monthly download statistics for all packages \\
     biocbuildReport & Bioconductor build report for all packages and systems \\
+    biocExplore & Interactively browsable ``bubble plot'' of Bioconductor packages and details \\
     problemPage & Produce interactive, customized build report for an individual package author \\
     buildPkgDependencyDataFrame & Convenience function to create tabular package dependency data set \\
     buildPkgDependencyIgraph & Treat package dependencies as a graph \\
     inducedSubgraphByPkgs & Create a minimal subgraph of Bioconductor dependencies bases on specific packages \\
     subgraphByDegree & Return a subgraph of all packages within a given degree of a single package \\
-    biocExplore & Interactively browsable ``bubble plot'' of Bioconductor packages and details \\
     \hline
   \end{tabularx} 
 \end{table}
 
-The
-\texttt{biocPkgList}, \texttt{biocDownloadStats}, and
-\texttt{biocBuildReport} functions access detailed package metadata,
-longitudinal download statistics, and build reports from the
-Bioconductor automated build process, respectively.
-
+After installing BiocPkgTools, the \texttt{biocDownloadStats} function
+can generate a tidy data structure summarizing monthly download
+statistics (both total and unique IP addresses) for all Bioconductor
+packages.
 
 <<downloads>>=
 library(BiocPkgTools)
 dlstats = biocDownloadStats()
-
 head(dlstats, 3)
 @ 
 
+The \texttt{biocBuildReport} function gathers information from the
+Bioconductor
+\href{http://bioconductor.org/checkResults/release/bioc-LATEST/}{build
+  report site} and can be used, for example, to summarize the ``build
+status'' for all Bioconductor pacakages.
+
 <<buildreport>>=
-buildrep = biocBuildReport()
+buildrep = biocBuildReport(version = "3.8")
+table(buildrep$stage, buildrep$result)
+@
 
-@ 
+These data are useful to developers to track the health of their
+software either programmatically or via a searchable, sortable table
+from the \texttt{problemPage} function.
 
-Take a look at Figure \ref{fig:dependencygraph}.
+As an alternative to google and the Bioconductor online software list, the \texttt{biocExplore} function offers interactive and graphical approach to package browsing (see Figure \ref{fig:biocexplore}). 
 
+\begin{figure}
+  \includegraphics[width=\linewidth]{biocExplore}
+  \caption{The \texttt{biocExplore} function opens an interactive web application that allows users to select focused groups of Bioconductor packages to view as a bubble plot. Bubbles are sized based on download statistics. Hovering over a bubble will give download number while clicking on a bubble will pop up a package details page, including a link to the package landing page.}
+  \label{fig:biocexplore}
+\end{figure}
+
+The Bioconductor package ecosystem is, by design, highly
+interconnected via package dependencies. Several functions in the
+BiocPkgTools package provide examples of package dependency graph
+creation and visualization. Figure \ref{fig:dependencygraph} displays
+packages within one degree of dependency relationship of the GEOquery
+package.
 
 \begin{figure}
   \includegraphics[width=\linewidth]{BiocPkgToolsDependencyGraph}
-  \caption{Visualizing dependencies between all packages within one
+  \caption{The \texttt{subgraphByDegree} function builds a data
+    visualization of dependencies between all packages within one
     degree of the GEOquery package using the visNetwork package
     \citep{visNetwork}. Links are colored based on type (Suggests,
     Depends, and Imports) and arrows point to the ``dependent''
@@ -188,37 +202,34 @@ Take a look at Figure \ref{fig:dependencygraph}.
   \label{fig:dependencygraph}
 \end{figure}
 
-\section*{Summary} % Optional - only if NO new datasets are included
+\section*{Implementation}
 
-- FAIR data
-- For developers
-- For users
-
-This section is required if the paper does not include novel data or analyses.  It allows authors to briefly summarize the key points from the article.
+BiocPkgTools is implemented as a standard R package and hosted in the
+Bioconductor repository. All functions are documented and include
+examples. An included tutorial (vignette) demonstrates features and
+capabilities. 
 
 \section*{Data availability} % Optional - only if novel data or analyses are included
-Please add details of where any datasets that are mentioned in the paper, and that have not have not previously been formally published, can be found.  If previously published datasets are mentioned, these should be cited in the references, as per usual scholarly conventions.
+All data accessed and used by the BiocPkgTools package are publicly available and are updated regularly at the Bioconductor project. 
 
 \section*{Software availability}
 This section will be generated by the Editorial Office before publication. Authors are asked to provide some initial information to assist the Editorial Office, as detailed below.
-\begin{enumerate}
-\item URL link to where the software can be downloaded from or used by a non-coder (AUTHOR TO PROVIDE; optional)
-\item URL link to the author's version control system repository containing the source code (AUTHOR TO PROVIDE; required)
-\item Link to source code as at time of publication ({\textit{F1000Research}} TO GENERATE)
-\item Link to archived source code as at time of publication ({\textit{F1000Research}} TO GENERATE)
-\item Software license (AUTHOR TO PROVIDE; required)
-\end{enumerate}
+\begin{itemize}
+\item Software URL: \href{https://Bioconductor.org/packages/BiocPkgTools}{https://Bioconductor.org/packages/BiocPkgTools} 
+\item Version Control URL: \href{https://github.com/seandavi/BiocPkgTools}{https://github.com/seandavi/BiocPkgTools} 
+\item Software package DOI: \href{https://doi.org/doi:10.18129/B9.bioc.BiocPkgTools}{doi:10.18129/B9.bioc.BiocPkgTools}
+\item Software License: MIT License
+\end{itemize}
 
 
 
 \section*{Author contributions}
-In order to give appropriate credit to each author of an article, the individual
-contributions of each author to the manuscript should be detailed in this section. We
-recommend using author initials and then stating briefly how they contributed.
+SD conceived of the project. All authors have reviewed and edited the manuscript. Authors contributing to code include MM, SD, SS, LS, and VC. 
+
 
 \section*{Competing interests}
-All financial, personal, or professional competing interests for any of the authors that
-could be construed to unduly influence the content of the article must be disclosed and will be displayed alongside the article. If there are no relevant competing interests to declare, please add the following: 'No competing interests were disclosed'.
+No competing interests were disclosed.
+\todo{Please add any competing interests.}
 
 \section*{Grant information}
 
@@ -231,15 +242,7 @@ the National Cancer Institute at the National Institutes of
 Health. Part of this work was performed on behalf of the SOUND
 Consortium and funded under the EU H2020 Personalizing Health and Care
 Program, Action contract number 633974.
-
-\section*{Acknowledgments}
-This section should acknowledge anyone who contributed to the research or the
-article but who does not qualify as an author based on the criteria provided earlier
-(e.g. someone or an organization that provided writing assistance). Please state how
-they contributed; authors should obtain permission to acknowledge from all those
-mentioned in the Acknowledgments section.
-
-Please do not list grant funding in this section.
+\todo{Please add any other grant/support information as needed.}
 
 
 \bibliographystyle{natbib}
