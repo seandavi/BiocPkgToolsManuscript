@@ -49,13 +49,13 @@
 
 \begin{abstract}
   \\ \textbf{Motivation:} The \emph{Bioconductor} project, a large collection of
-  open source software for the comprehension of large-scale biologic
+  open source software for the comprehension of large-scale biological
   data, continues to grow with new packages added each week,
   motivating the development of software tools focused on exposing
   package metadata to developers and users. The resulting BiocPkgTools
   package facilitates access to the \emph{Bioconductor} package ecosystem and
   associated metadata in computable form, enabling potential
-  downstream applicaitons such as custom reporting, data and text
+  downstream applications such as custom reporting, data and text
   mining of \emph{Bioconductor} packages, graph analytics over package
   dependencies, and advanced, custom search approaches. \\
   \textbf{Results:} The BiocPkgTools package has been incorporated
@@ -69,7 +69,7 @@
   in task-centric package discovery. Full documentation and example
   use cases are included. \\ \textbf{Availability:} The BiocPkgTools
   software and complete documentation are available from \emph{Bioconductor}
-  (\href{https://Bioconductor.org/packages/BiocPkgTools}{https://Bioconductor.org/packages/BiocPkgTools}).
+  (\href{https://bioconductor.org/packages/BiocPkgTools}{https://bioconductor.org/packages/BiocPkgTools}).
 \end{abstract}
 
 \section*{Keywords}
@@ -98,8 +98,8 @@ dldata = biocDownloadStats()
 \section*{Introduction}
 
 \emph{Bioconductor} is a open source software project (comprising
-\Sexpr{nrow(pkgdata)} individual packages) and community devoted to
-the analysis and comprehension of large-scale biologic data. The
+\Sexpr{nrow(pkgdata)} individual software packages) and community for
+the analysis and comprehension of large-scale biological data. The
 project maintains an automated system that ensures that packages in
 the \emph{Bioconductor} project build successfully and pass basic
 checks. Package downloads are tracked and aggregated by package and
@@ -110,7 +110,7 @@ compiled based on package metadata.
 The current size and growth of the \emph{Bioconductor} project suggests that
 there is merit in exposing computable forms of the metadata describing
 the \emph{Bioconductor} package ecosystem. To that end, we developed a small
-suite of tools to provide easy access to project details such download
+suite of tools to provide easy access to project details such as download
 statistics, bulk package metadata, and package build
 status. Developers, project leaders, open source software researchers,
 and \emph{Bioconductor} end users can build on the availability of these data
@@ -120,12 +120,12 @@ package filtering, and text mining.
 
 \section*{Features and usage}
 
-The core functionality of the BiocPkgTools package is to expose
+The core functionality of BiocPkgTools is to expose
 \emph{Bioconductor} project and package metadata as tidy
 \citep{Wickham2014-ye} objects. The data presented by the package are
 accessed directly from online resources available from
 \emph{Bioconductor}. As such, the package relies on web connectivity and
-utilizes the most recent data. Installation instructions are detailed
+uses the most recent data. Installation instructions are detailed
 on the package website.
 
 Package functionality can be roughly divided into data access, data presentation, and graph/network functionality. See Table \ref{tab:functions} for an overview.
@@ -137,15 +137,15 @@ Package functionality can be roughly divided into data access, data presentation
     \hline 
     Name & Functionality \\
     \hline 
-    biocPkgList & Package details including description, author and maintainer, dependencies, URLs, bug report mechanism, \\
+    biocPkgList & Package details including description, author and maintainer, dependencies, URLs, bug report mechanism \\
     biocDownloadStats & Monthly download statistics for all packages \\
     biocbuildReport & \emph{Bioconductor} build report for all packages and systems \\
-    biocExplore & Interactively browsable ``bubble plot'' of \emph{Bioconductor} packages and details \\
-    problemPage & Produce interactive, customized build report for an individual package author \\
-    buildPkgDependencyDataFrame & Convenience function to create tabular package dependency data set \\
-    buildPkgDependencyIgraph & Treat package dependencies as a graph \\
-    inducedSubgraphByPkgs & Create a minimal subgraph of \emph{Bioconductor} dependencies bases on specific packages \\
-    subgraphByDegree & Return a subgraph of all packages within a given degree of a single package \\
+    biocExplore & Interactive, browsable ``bubble plot'' of \emph{Bioconductor} packages and details \\
+    problemPage & Interactive, customized build report for an individual package author \\
+    buildPkgDependencyDataFrame & Package dependencies as data frame (tibble) \\
+    buildPkgDependencyIgraph & Package dependencies as a graph \\
+    inducedSubgraphByPkgs & Create a minimal subgraph of \emph{Bioconductor} dependencies based on specific packages \\
+    subgraphByDegree & Create a subgraph of all packages within a given degree of a single package \\
     \hline
   \end{tabularx} 
 \end{table}
@@ -215,7 +215,7 @@ All data accessed and used by the BiocPkgTools package are publicly available an
 \section*{Software availability}
 This section will be generated by the Editorial Office before publication. Authors are asked to provide some initial information to assist the Editorial Office, as detailed below.
 \begin{itemize}
-\item Software URL: \href{https://Bioconductor.org/packages/BiocPkgTools}{https://Bioconductorg.org/packages/BiocPkgTools} 
+\item Software URL: \href{https://bioconductor.org/packages/BiocPkgTools}{https://bioconductorg.org/packages/BiocPkgTools} 
 \item Version Control URL: \href{https://github.com/seandavi/BiocPkgTools}{https://github.com/seandavi/BiocPkgTools} 
 \item Software package DOI: \href{https://doi.org/doi:10.18129/B9.bioc.BiocPkgTools}{doi:10.18129/B9.bioc.BiocPkgTools}
 \item Software License: MIT License
