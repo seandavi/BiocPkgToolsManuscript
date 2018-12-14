@@ -139,7 +139,7 @@ presentation, and graph/network functionality. See Table
     biocExplore & Interactive, browsable ``bubble plot'' of \emph{Bioconductor} packages and details \\
     problemPage & Interactive, customized build report for an individual package author \\
     buildPkgDependencyDataFrame & Package dependencies as data frame \\
-    buildPkgDependencyIgraph & Package dependencies as a graph \\
+    buildPkgDependencyIgraph & Package dependencies as a graph \citep{igraph} \\
     inducedSubgraphByPkgs & Create a minimal subgraph of \emph{Bioconductor} dependencies based on specific packages \\
     subgraphByDegree & Create a subgraph of all packages within a given degree of a single package \\
     \hline
@@ -172,7 +172,10 @@ These data are useful to developers to track the health of their
 software either programmatically or via a searchable, sortable table
 from the \texttt{problemPage} function.
 
-As an alternative to google and the \emph{Bioconductor} online software list, the \texttt{biocExplore} function offers interactive and graphical approach to package browsing (see Figure \ref{fig:biocexplore}). 
+As an alternative to basic web browser search and the
+\emph{Bioconductor} online software list, the \texttt{biocExplore}
+function offers interactive and graphical approach to package browsing
+(see Figure \ref{fig:biocexplore}).
 
 \begin{figure}
   \includegraphics[width=\linewidth]{biocExplore}
