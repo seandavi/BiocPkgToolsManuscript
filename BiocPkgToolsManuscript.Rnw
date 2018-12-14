@@ -16,16 +16,6 @@
 % \let\cite\citep
 
 
-
-%% \title[BiocPkgTools: Inspecting the Bioconductor ecosystem]{BiocPkgTools: Utilities for inspecting the Bioconductor package ecosystem}
-%% \author[Davis \textit{et~al}.]{Martin T. Morgan\,$^{\text{\sfb 2}}$, Lori Shepherd\,$^{\text{\sfb 2}}$, Vincent J. Carey\,$^{\text{\sfb 3}}$, and Sean Davis\,$^{\text{\sfb 1,}*}$}
-%% \address{$^{\text{\sf 1}}$Center for Cancer Research, National Cancer Institute, National Institutes of Health, Bethesda, MD 20892, USA\\
-%%   $^{\text{\sf 2}}$Roswell Park Comprehensive Cancer Center, Buffalo, NY 14203, USA\\
-%%   $^{\text{\sf 3}}$Channing Division of Network Medicine, Brigham and Women's Hospital, Boston, MA 02115, USA}
-
-%% \corresp{$^\ast$To whom correspondence should be addressed.}
-
-
 \begin{document}
 
 \pagestyle{front}
@@ -48,27 +38,29 @@
 
 
 \begin{abstract}
-  \\ \textbf{Motivation:} The \emph{Bioconductor} project, a large collection of
-  open source software for the comprehension of large-scale biological
-  data, continues to grow with new packages added each week,
-  motivating the development of software tools focused on exposing
-  package metadata to developers and users. The resulting BiocPkgTools
-  package facilitates access to the \emph{Bioconductor} package ecosystem and
-  associated metadata in computable form, enabling potential
-  downstream applications such as custom reporting, data and text
-  mining of \emph{Bioconductor} packages, graph analytics over package
-  dependencies, and advanced, custom search approaches. \\
+  \\ \textbf{Motivation:} The \emph{Bioconductor} project, a large
+  collection of open source software for the comprehension of
+  large-scale biological data, continues to grow with new packages
+  added each week, motivating the development of software tools
+  focused on exposing package metadata to developers and users. The
+  resulting BiocPkgTools package facilitates access to extensive
+  metadata in computable form covering the \emph{Bioconductor} package
+  ecosystem, facilitating downstream applications such as custom
+  reporting, data and text mining of \emph{Bioconductor} package text
+  descriptions, graph analytics over package
+  dependencies, and custom search approaches. \\
   \textbf{Results:} The BiocPkgTools package has been incorporated
-  into the \emph{Bioconductor} project, installs using standard procedures,
-  and runs on any system supporting R. It provides functions to load
-  detailed package metadata, longitudinal package download statistics,
-  package dependencies, and \emph{Bioconductor} build reports, all in ``tidy
-  data'' form. BiocPkgTools can convert from tidy data structures to
-  graph structures, enabling graph-based analytics and
-  visualization. An end-user-friendly graphical package explorer aids
-  in task-centric package discovery. Full documentation and example
-  use cases are included. \\ \textbf{Availability:} The BiocPkgTools
-  software and complete documentation are available from \emph{Bioconductor}
+  into the \emph{Bioconductor} project, installs using standard
+  procedures, and runs on any system supporting R. It provides
+  functions to load detailed package metadata, longitudinal package
+  download statistics, package dependencies, and \emph{Bioconductor}
+  build reports, all in ``tidy data'' form. BiocPkgTools can convert
+  from tidy data structures to graph structures, enabling graph-based
+  analytics and visualization. An end-user-friendly graphical package
+  explorer aids in task-centric package discovery. Full documentation
+  and example use cases are included. \\ \textbf{Availability:} The
+  BiocPkgTools software and complete documentation are available from
+  \emph{Bioconductor}
   (\href{https://bioconductor.org/packages/BiocPkgTools}{https://bioconductor.org/packages/BiocPkgTools}).
 \end{abstract}
 
@@ -98,14 +90,16 @@ dldata = biocDownloadStats()
 \section*{Introduction}
 
 \emph{Bioconductor} is a open source software project (comprising
-\Sexpr{nrow(pkgdata)} individual software packages) and community for
-the analysis and comprehension of large-scale biological data. The
-project maintains an automated system that ensures that packages in
-the \emph{Bioconductor} project build successfully and pass basic
-checks. Package downloads are tracked and aggregated by package and
-month, longitudinally. Finally, package details such as title,
-description, version, author, and dependencies on other R packages are
-compiled based on package metadata.
+\Sexpr{nrow(pkgdata)} individual analysis packages) and community for
+the analysis and comprehension of large-scale biological
+data. Newly submitted software packages undergo a technical review to ensure
+that best practices and \emph{Biocondutor} coding conventions are
+followed. The project maintains an automated system that ensures that
+packages in the \emph{Bioconductor} project build successfully and
+pass basic checks. Package downloads are tracked and aggregated by
+package and month, longitudinally. Finally, package details such as
+title, description, version, author, and dependencies on other R
+packages are compiled based on package metadata.
 
 The current size and growth of the \emph{Bioconductor} project suggests that
 there is merit in exposing computable forms of the metadata describing
@@ -128,7 +122,9 @@ accessed directly from online resources available from
 uses the most recent data. Installation instructions are detailed
 on the package website.
 
-Package functionality can be roughly divided into data access, data presentation, and graph/network functionality. See Table \ref{tab:functions} for an overview.
+Package functionality can be roughly divided into data access, data
+presentation, and graph/network functionality. See Table
+\ref{tab:functions} for an overview.
 
 \begin{table}[h]
   \caption{Main package functions and descriptions.}
@@ -142,7 +138,7 @@ Package functionality can be roughly divided into data access, data presentation
     biocbuildReport & \emph{Bioconductor} build report for all packages and systems \\
     biocExplore & Interactive, browsable ``bubble plot'' of \emph{Bioconductor} packages and details \\
     problemPage & Interactive, customized build report for an individual package author \\
-    buildPkgDependencyDataFrame & Package dependencies as data frame (tibble) \\
+    buildPkgDependencyDataFrame & Package dependencies as data frame \\
     buildPkgDependencyIgraph & Package dependencies as a graph \\
     inducedSubgraphByPkgs & Create a minimal subgraph of \emph{Bioconductor} dependencies based on specific packages \\
     subgraphByDegree & Create a subgraph of all packages within a given degree of a single package \\
@@ -196,8 +192,8 @@ package.
   \caption{The \texttt{subgraphByDegree} function builds a data
     visualization of dependencies between all packages within one
     degree of the GEOquery package using the visNetwork package
-    \citep{visNetwork}. Links are colored based on type (Suggests,
-    Depends, and Imports) and arrows point to the ``dependent''
+    \citep{visNetwork}. Links are colored based on type (Suggests [light blue],
+    Depends [green], and Imports [red]) and arrows point to the ``dependent''
     package. }
   \label{fig:dependencygraph}
 \end{figure}
@@ -229,20 +225,18 @@ SD conceived of the project. All authors have reviewed and edited the manuscript
 
 \section*{Competing interests}
 No competing interests were disclosed.
-\todo{Please add any competing interests.}
 
 \section*{Grant information}
 
 Research reported in this publication was supported by the National
 Human Genome Research Institute of the National Institutes of Health
 under award number U41HG004059, the National Cancer Institute of the
-National Institutes of Health under award number U24CA180996, and the
-Center for Cancer Research, part of the Intramural Research Program at
-the National Cancer Institute at the National Institutes of
-Health. Part of this work was performed on behalf of the SOUND
-Consortium and funded under the EU H2020 Personalizing Health and Care
-Program, Action contract number 633974.
-\todo{Please add any other grant/support information as needed.}
+National Institutes of Health under award numbers U24CA180996 and
+U01CA214846-02, and the Center for Cancer Research, part of the
+Intramural Research Program at the National Cancer Institute at the
+National Institutes of Health. Part of this work was performed on
+behalf of the SOUND Consortium and funded under the EU H2020
+Personalizing Health and Care Program, Action contract number 633974.
 
 
 \bibliographystyle{natbib}
