@@ -26,7 +26,7 @@
 \author[2]{Vincent~J. Carey}
 \author[3]{Lori Shepherd}
 \author[1]{Matthew Ritchie}
-\author[3]{Martin~T. Morgan}
+\author[3]{\mbox{Martin~T. Morgan}}
 \author[4]{Sean Davis}
 \affil[1]{Molecular Medicine Division, The Walter and Eliza Hall Institute of Medical Research, Parkville, Australia}
 \affil[2]{Channing Division of Network Medicine, Brigham and Women's Hospital, Boston, MA, USA}
