@@ -91,15 +91,16 @@ dldata = biocDownloadStats()
 
 \emph{Bioconductor} is a open source software project (comprising
 \Sexpr{nrow(pkgdata)} individual analysis packages) and community for
-the analysis and comprehension of large-scale biological
-data. Newly submitted software packages undergo a technical review to ensure
-that best practices and \emph{Biocondutor} coding conventions are
-followed. The project maintains an automated system that ensures that
-packages in the \emph{Bioconductor} project build successfully and
-pass basic checks. Package downloads are tracked and aggregated by
-package and month, longitudinally. Finally, package details such as
-title, description, version, author, and dependencies on other R
-packages are compiled based on package metadata.
+the analysis and comprehension of large-scale biological data. Newly
+submitted software packages undergo a technical review to ensure that
+best practices and \emph{Biocondutor} coding conventions are
+followed. The project maintains an automated build system that ensures
+that packages in the \emph{Bioconductor} project are compiled and
+built successfully and pass basic checks. Package downloads are
+tracked and aggregated by package and month, longitudinally. Finally,
+package details such as title, description, version, author, and
+dependencies on other R packages are compiled based on package
+metadata.
 
 The current size and growth of the \emph{Bioconductor} project suggests that
 there is merit in exposing computable forms of the metadata describing
@@ -115,16 +116,23 @@ package filtering, and text mining.
 \section*{Features and usage}
 
 The core functionality of BiocPkgTools is to expose
-\emph{Bioconductor} project and package metadata as tidy
+\emph{Bioconductor} project and package metadata as tidy data
 \citep{Wickham2014-ye} objects. The data presented by the package are
 accessed directly from online resources available from
 \emph{Bioconductor}. As such, the package relies on web connectivity and
-uses the most recent data. Installation instructions are detailed
+collects the most recent data. Installation instructions are detailed
 on the package website.
 
 Package functionality can be roughly divided into data access, data
 presentation, and graph/network functionality. See Table
 \ref{tab:functions} for an overview.
+
+\begin{figure}
+  \caption{Schematic overview of the BiocPkgtools package. BiocPkgTools can access and transform web-accessible resources including package metadata, download statistics, dependencies between packages, and updated \emph{Bioconductor} build report status to "tidy data" reports that can be manipulated using standard R tools. Interactive package exploration is also available.}
+  \label{fig:overview}
+  \includegraphics[width=1.0\textwidth]{BiocPkgToolsFig1mock.png}
+\end{figure}
+
 
 \begin{table}[h]
   \caption{Main package functions and descriptions.}
@@ -164,7 +172,7 @@ The \texttt{biocBuildReport} function gathers information from the
 status'' for all \emph{Bioconductor} pacakages.
 
 <<buildreport>>=
-buildrep = biocBuildReport(version = "3.8")
+buildrep = biocBuildReport(version = "3.9")
 table(buildrep$stage, buildrep$result)
 @
 
